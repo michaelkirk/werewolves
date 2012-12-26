@@ -26,7 +26,7 @@ class Issue
 
 
   def self.crawl(issue_number)
-    file_name = File.join(FILE_ROOT, "#{issue_number}.json")
+    Rails.logger.debug('crawling issue: #{issue_number}')
     url = [BASE_DOMAIN_URL, "page_#{issue_number}.html"].join('/')
     issue = Issue.from_url(url)
     File.open(file_name(issue_number), 'w') { |file| file << issue.to_json }
