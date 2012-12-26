@@ -6,6 +6,9 @@ class Image
   def self.from_tag(doc)
     Image.new(doc[:src])
   end
+  def as_json
+    { src: src }
+  end
 end
 
 

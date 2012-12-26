@@ -28,6 +28,10 @@ group :development do
   gem 'rb-inotify'
   gem 'pry'
 end
+
+group :test do
+  gem 'webmock'
+end
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
