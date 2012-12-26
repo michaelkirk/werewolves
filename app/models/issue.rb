@@ -20,17 +20,22 @@ class Issue
     end
   end
 
+  def self.file_name(issue_number)
+    File.join(FILE_ROOT, "#{issue_number}.json")
+  end
+
+
   def self.crawl(issue_number)
     file_name = File.join(FILE_ROOT, "#{issue_number}.json")
     url = [BASE_DOMAIN_URL, "page_#{issue_number}.html"].join('/')
     issue = Issue.from_url(url)
-    File.open(file_name, 'w') { |file| file << issue.to_json }
+    File.open(file_name(issue_number), 'w') { |file| file << issue.to_json }
   end
 
   def parse(html)
     doc = Nokogiri.HTML(html)
     @images = doc.css('img').map { |img| Image.from_tag(img) }
-    @audio = OpenStruct.new({ src: doc.css('embed')[0][:src] })
+    @audio = Audio.from_tag(doc.css('embed')[0])
     @title = doc.css('h1').text
     @subtitle = doc.css('.soundtrack').text
     nil

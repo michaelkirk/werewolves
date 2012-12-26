@@ -3,14 +3,14 @@
 
 <% if @issue_hash[:audio] %>
   <div class="audio-box">
-    <%= audio_tag @issue_hash[:audio][:src], :autoplay => true, :controls => true, :loop => true %>
+    <%= audio_tag Issue::BASE_DOMAIN_URL + "/" + @issue_hash[:audio][:src], :autoplay => true, :controls => true, :loop => true %>
     </audio>
   </div>
 <% end %>
 
 <ul id="images">
   <% @issue_hash[:images].each do |image| %>
-    <li><%= image_tag image[:src] %></li>
+    <li><%= image_tag Issue::BASE_DOMAIN_URL + "/" + image[:src] %></li>
   <% end %>
 </ul>
 
