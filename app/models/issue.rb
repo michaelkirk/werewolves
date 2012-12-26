@@ -105,7 +105,7 @@ class Issue
       subtitle: subtitle,
       next_label: next_label,
       previous_label: previous_label,
-      audio: audio.as_json,
+      audio: (audio and audio.as_json),
       images: images.map { |image| image.as_json }
     }
   end
