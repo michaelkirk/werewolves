@@ -5,16 +5,38 @@ require 'json'
 class Issue
   BASE_DOMAIN_URL = "http://www.werewolvesfuckyoface.com"
   FILE_ROOT = 'db/issues'
-  attr_reader :title, :subtitle, :next_label, :prev_label, :audio, :images
+  LATEST_ISSUE_ID = 11
+  
+  attr_reader :title, :subtitle, :next_label, :previous_label, :audio, :images, :id
+
+  def previous_id
+    if id > 2
+      id + 1
+    else
+      LATEST_ISSUE_ID
+    end
+  end
+
+  def next_id
+    if id < LATEST_ISSUE_ID
+      id + 1
+    else
+      2
+    end
+  end
 
   def self.latest
     #TODO don't hardcode this.
-    self.fetch(11)
+    self.fetch(LATEST_ISSUE_ID)
+  end
+
+  def initialize(id = nil)
+    @id = id
   end
 
   #TODO wtf writing my own persistance enginer???
   def self.fetch(issue_number)
-    issue = self.new
+    issue = self.new(issue_number.to_i)
     issue.update_from_json(JSON.parse(File.read(Issue.file_name(issue_number))))
     issue
   end
@@ -24,6 +46,8 @@ class Issue
     @subtitle = json['subtitle']
     @audio = Audio.from_hash(json['audio'])
     @images = json['images'].map { |image_json| Image.from_hash(image_json) }
+    @next_label = json['next_label']
+    @previous_label = json['previous_label']
   end
 
   def self.from_url(url)
@@ -54,9 +78,11 @@ class Issue
   def parse(html)
     doc = Nokogiri.HTML(html)
     @images = doc.css('img').map { |img| Image.from_tag(img) }
-    @audio = Audio.from_tag(doc.css('embed')[0]) if doc.css('embed')
+    @audio = Audio.from_tag(doc.css('embed')[0]) unless doc.css('embed').empty?
     @title = doc.css('h1').text
     @subtitle = doc.css('.soundtrack').text
+    @next_label = doc.css('h3 a:contains(">")').text
+    @previous_label = doc.css('h3 a:contains("<")').text
     nil
   end
 
@@ -65,6 +91,8 @@ class Issue
     Rails.logger.debug("missing audio") if audio.empty?
     Rails.logger.debug("missing title") if title.empty?
     Rails.logger.debug("missing subtitle") if subtitle.empty?
+    Rails.logger.debug("missing 'next' label") if next_label.empty?
+    Rails.logger.debug("missing 'prev' label") if previous_label.empty?
   end
 
   def to_json
@@ -75,6 +103,8 @@ class Issue
     {
       title: title,
       subtitle: subtitle,
+      next_label: next_label,
+      previous_label: previous_label,
       audio: audio.as_json,
       images: images.map { |image| image.as_json }
     }

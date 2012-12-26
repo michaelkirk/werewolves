@@ -1,5 +1,12 @@
 <h1><%= @issue.title %></h1>
 <h2><%= @issue.subtitle %></h2>
+<span class="previous navigation">
+  <%= link_to @issue.previous_label, issue_path(@issue.previous_id) %>
+</span>
+<span class="next navigation">
+  <%= link_to @issue.next_label, issue_path(@issue.next_id) %>
+</span>
+
 
 <% if @issue.audio %>
   <div class="audio-box">

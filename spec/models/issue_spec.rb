@@ -5,8 +5,8 @@ describe Issue do
   let(:issue) { Issue.new }
   
   describe "#parse" do
+    let(:html) { File.read('spec/fixtures/html/example_issue.html') }
     before do
-      html = File.read('spec/fixtures/html/example_issue.html')
       issue.parse(html)
     end
     it "should count the number of images" do
@@ -32,7 +32,15 @@ describe Issue do
     
     its(:title) { should == "all necessities provided. all anxieties tranquilized. all boredom amused." }
     its(:subtitle) { should == "MOM, CLICK HERE FOR A FREE IPAD." }
+    its(:next_label) { should == "want for wild things >" }
+    its(:previous_label) { should == "< think wild thoughts" }
 
+    context "with a different page" do
+      let(:html) { File.read('spec/fixtures/html/example_issue_2.html') }
+
+      its(:next_label) { should == "forgive>" }
+      its(:previous_label) { should == "< hold grudge" }
+    end
   end
 
   describe ".crawl" do
