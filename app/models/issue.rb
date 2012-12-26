@@ -44,7 +44,7 @@ class Issue
   def update_from_json(json)
     @title = json['title']
     @subtitle = json['subtitle']
-    @audio = Audio.from_hash(json['audio'])
+    @audio = (json['audio'] and Audio.from_hash(json['audio']))
     @images = json['images'].map { |image_json| Image.from_hash(image_json) }
     @next_label = json['next_label']
     @previous_label = json['previous_label']
