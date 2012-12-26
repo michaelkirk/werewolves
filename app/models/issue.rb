@@ -26,8 +26,8 @@ class Issue
 
 
   def self.crawl(issue_number)
-    Rails.logger.debug('crawling issue: #{issue_number}')
     url = [BASE_DOMAIN_URL, "page_#{issue_number}.html"].join('/')
+    Rails.logger.debug("crawling: #{url}")
     issue = Issue.from_url(url)
     File.open(file_name(issue_number), 'w') { |file| file << issue.to_json }
   end
@@ -35,10 +35,17 @@ class Issue
   def parse(html)
     doc = Nokogiri.HTML(html)
     @images = doc.css('img').map { |img| Image.from_tag(img) }
-    @audio = Audio.from_tag(doc.css('embed')[0])
+    @audio = Audio.from_tag(doc.css('embed')[0]) if doc.css('embed')
     @title = doc.css('h1').text
     @subtitle = doc.css('.soundtrack').text
     nil
+  end
+
+  def validate
+    Rails.logger.debug("missing images") if images.empty?
+    Rails.logger.debug("missing audio") if audio.empty?
+    Rails.logger.debug("missing title") if title.empty?
+    Rails.logger.debug("missing subtitle") if subtitle.empty?
   end
 
   def to_json
@@ -49,7 +56,7 @@ class Issue
     {
       title: title,
       subtitle: subtitle,
-      audio: audio,
+      audio: audio.as_json,
       images: images.map { |image| image.as_json }
     }
   end
