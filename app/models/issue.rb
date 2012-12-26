@@ -5,7 +5,7 @@ require 'json'
 class Issue
   BASE_DOMAIN_URL = "http://www.werewolvesfuckyoface.com"
   FILE_ROOT = 'db/issues'
-  LATEST_ISSUE_ID = 11
+  LATEST_ISSUE_ID = 13
   
   attr_reader :title, :subtitle, :next_label, :previous_label, :audio, :images, :id
 
