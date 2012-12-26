@@ -31,6 +31,8 @@ class Issue
     doc = Nokogiri.HTML(html)
     @images = doc.css('img').map { |img| Image.from_tag(img) }
     @audio = OpenStruct.new({ src: doc.css('embed')[0][:src] })
+    @title = doc.css('h1').text
+    @subtitle = doc.css('.soundtrack').text
     nil
   end
 

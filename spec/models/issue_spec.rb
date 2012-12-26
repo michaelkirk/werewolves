@@ -1,8 +1,10 @@
 require 'spec_helper'
 
 describe Issue do
+  subject { issue }
+  let(:issue) { Issue.new }
+  
   describe "#parse" do
-    let(:issue) { Issue.new }
     before do
       html = File.read('spec/fixtures/html/example_issue.html')
       issue.parse(html)
@@ -27,6 +29,10 @@ describe Issue do
         issue.audio.src.should == "_audio/CANT%20SEEM%20FOREVER.wav"
       end
     end
+    
+    its(:title) { should == "all necessities provided. all anxieties tranquilized. all boredom amused." }
+    its(:subtitle) { should == "MOM, CLICK HERE FOR A FREE IPAD." }
+
   end
 
   describe "#crawl" do
