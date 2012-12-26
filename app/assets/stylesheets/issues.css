@@ -40,3 +40,6 @@ body {
   margin-top: 10px;
   text-align: center;
 }
+.navigation a, .navigation a:visited  {
+  color: purple
+}
