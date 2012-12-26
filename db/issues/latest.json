@@ -1,0 +1,10 @@
+{
+  "title": "latest post title",
+  "subtitle": "latest post subtitle",
+  "audio": { "src": "http://www.werewolvesfuckyoface.com/_audio/GOODBYE%20FOREVER.mp3"},
+  "images": [
+    { "src": "http://www.werewolvesfuckyoface.com/_images/13/-1.jpeg" },
+    { "src": "http://www.werewolvesfuckyoface.com/_images/13/-2.jpeg" },
+    { "src": "http://www.werewolvesfuckyoface.com/_images/13/-3.jpeg" }
+  ]
+}

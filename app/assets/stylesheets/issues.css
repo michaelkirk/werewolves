@@ -1,0 +1,42 @@
+h1, h2 {
+  text-align: center;
+}
+h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+h2 {
+  font-size: 12px;
+  margin: 8px, 0;
+}
+#images img {
+  width: 100%;
+}
+ul, li {
+  margin: 0;
+  padding: 0;
+}
+img {
+  margin-bottom: 5px;
+}
+body {
+  font-family: Gadget, Sans;
+  color: purple;
+  padding: 10px;
+}
+.left {
+  position: absolute;
+  left: 20px;
+  top: 10px;
+  font-size: 20px;
+}
+.right {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  font-size: 20px;
+}
+.audio-box {
+  margin-top: 10px;
+  text-align: center;
+}

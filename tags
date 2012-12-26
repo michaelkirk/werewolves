@@ -1,0 +1,16 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ApplicationController	/home/mkirk/src/werewolves/app/controllers/application_controller.rb	/^class ApplicationController < ActionController::Base$/;"	c
+ApplicationHelper	/home/mkirk/src/werewolves/app/helpers/application_helper.rb	/^module ApplicationHelper$/;"	m
+Image	/home/mkirk/src/werewolves/app/models/image.rb	/^class Image$/;"	c
+Issue	/home/mkirk/src/werewolves/app/models/issue.rb	/^class Issue$/;"	c
+IssuesController	/home/mkirk/src/werewolves/app/controllers/issues_controller.rb	/^class IssuesController < ApplicationController$/;"	c
+from_tag	/home/mkirk/src/werewolves/app/models/image.rb	/^  def self.from_tag(doc)$/;"	F	class:Image
+from_url	/home/mkirk/src/werewolves/app/models/issue.rb	/^  def self.from_url(url)$/;"	F	class:Issue
+initialize	/home/mkirk/src/werewolves/app/models/image.rb	/^  def initialize(src)$/;"	f	class:Image
+latest	/home/mkirk/src/werewolves/app/controllers/issues_controller.rb	/^  def latest$/;"	f	class:IssuesController
+parse	/home/mkirk/src/werewolves/app/models/issue.rb	/^  def parse(html)$/;"	f	class:Issue
