@@ -35,7 +35,7 @@ describe Issue do
 
   end
 
-  describe "#crawl" do
+  describe ".crawl" do
     before do
       issue_json = File.read('spec/fixtures/json/example_issue.json')
       issue_html = File.read('spec/fixtures/html/example_issue.html')
@@ -50,6 +50,21 @@ describe Issue do
       Issue.any_instance.should_receive(:as_json).and_return(issue_json)
       file_handle.should_receive(:<<).with("\"the_issue_json\"")
       Issue.crawl(2)
+    end
+  end
+
+  describe ".update_from_json" do
+    it "should set all the appropriate values from json" do
+      issue_json = File.read('spec/fixtures/json/example_issue.json')
+      issue.update_from_json(JSON.parse(issue_json))
+      issue.title.should == "latest post title"
+      issue.subtitle.should == "latest post subtitle"
+      issue.audio.src.should == "_audio/GOODBYE%20FOREVER.mp3"
+      (issue.images.map &:src).should == [
+        "_images/13/-1.jpeg",
+        "_images/13/-2.jpeg",
+        "_images/13/-3.jpeg"
+      ]
     end
   end
 end

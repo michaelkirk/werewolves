@@ -5,7 +5,26 @@ require 'json'
 class Issue
   BASE_DOMAIN_URL = "http://www.werewolvesfuckyoface.com"
   FILE_ROOT = 'db/issues'
-  attr_reader :title, :subtitle, :audio, :images
+  attr_reader :title, :subtitle, :next_label, :prev_label, :audio, :images
+
+  def self.latest
+    #TODO don't hardcode this.
+    self.fetch(11)
+  end
+
+  #TODO wtf writing my own persistance enginer???
+  def self.fetch(issue_number)
+    issue = self.new
+    issue.update_from_json(JSON.parse(File.read(Issue.file_name(issue_number))))
+    issue
+  end
+
+  def update_from_json(json)
+    @title = json['title']
+    @subtitle = json['subtitle']
+    @audio = Audio.from_hash(json['audio'])
+    @images = json['images'].map { |image_json| Image.from_hash(image_json) }
+  end
 
   def self.from_url(url)
     issue = new

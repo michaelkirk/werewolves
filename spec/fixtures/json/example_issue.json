@@ -1,10 +1,12 @@
 {
   "title": "latest post title",
   "subtitle": "latest post subtitle",
-  "audio": { "src": "http://www.werewolvesfuckyoface.com/_audio/GOODBYE%20FOREVER.mp3"},
+  "audio": { "src": "_audio/GOODBYE%20FOREVER.mp3"},
+  "next_label": "think wild thoughts >",
+  "previous_label": "< want for wild things",
   "images": [
-    { "src": "http://www.werewolvesfuckyoface.com/_images/13/-1.jpeg" },
-    { "src": "http://www.werewolvesfuckyoface.com/_images/13/-2.jpeg" },
-    { "src": "http://www.werewolvesfuckyoface.com/_images/13/-3.jpeg" }
+    { "src": "_images/13/-1.jpeg" },
+    { "src": "_images/13/-2.jpeg" },
+    { "src": "_images/13/-3.jpeg" }
   ]
 }

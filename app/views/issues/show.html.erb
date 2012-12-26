@@ -1,16 +1,16 @@
-<h1><%= @issue_hash[:title] %></h1>
-<h2><%= @issue_hash[:subtitle] %></h2>
+<h1><%= @issue.title %></h1>
+<h2><%= @issue.subtitle %></h2>
 
-<% if @issue_hash[:audio] %>
+<% if @issue.audio %>
   <div class="audio-box">
-    <%= audio_tag Issue::BASE_DOMAIN_URL + "/" + @issue_hash[:audio][:src], :autoplay => true, :controls => true, :loop => true %>
+    <%= audio_tag Issue::BASE_DOMAIN_URL + "/" + @issue.audio.src, :autoplay => true, :controls => true, :loop => true %>
     </audio>
   </div>
 <% end %>
 
 <ul id="images">
-  <% @issue_hash[:images].each do |image| %>
-    <li><%= image_tag Issue::BASE_DOMAIN_URL + "/" + image[:src] %></li>
+  <% @issue.images.each do |image| %>
+    <li><%= image_tag Issue::BASE_DOMAIN_URL + "/" + image.src %></li>
   <% end %>
 </ul>
 
