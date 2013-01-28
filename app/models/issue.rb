@@ -11,7 +11,7 @@ class Issue
 
   def previous_id
     if id > 2
-      id + 1
+      id - 1
     else
       LATEST_ISSUE_ID
     end
