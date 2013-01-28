@@ -1,13 +1,12 @@
 h1, h2 {
   text-align: center;
+  margin-bottom: 30px;
 }
 h1 {
-  font-size: 60px;
-  margin-bottom: 10px;
+  font-size: 80px;
 }
 h2 {
-  font-size: 30px;
-  margin: 8px, 0;
+  font-size: 50px;
 }
 #images img {
   width: 100%;
@@ -40,10 +39,13 @@ body {
 .next.navigation {
   float: right;
 }
+
 .audio-box {
-  margin-top: 10px;
+  margin-top: 30px;
+  margin-bottom: 30px;
   text-align: center;
 }
 .navigation a, .navigation a:visited  {
-  color: purple
+  color: purple;
+  font-size: 30px;
 }
