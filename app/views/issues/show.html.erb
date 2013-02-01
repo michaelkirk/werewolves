@@ -1,17 +1,35 @@
+<script type="text/javascript">
+$(function() {
+
+  function moveWithScroll($el) {
+    window.onscroll = function() {
+      this.offsets = this.offsets || {}
+      var offset = this.offsets[$el] = this.offsets[$el] || $el.position().top;
+      if (document.documentElement.scrollTop > offset || self.pageYOffset > offset) {
+        $el.css({position: 'fixed', top: '0px'});
+      } else if (document.documentElement.scrollTop < offset || self.pageYOffset < offset) {
+        $el.css({position: 'static', top: offset + 'px'});
+      }
+    }
+  }
+  moveWithScroll($('.navigation'));
+});
+</script>
 <h1><%= @issue.title %></h1>
 <h2><%= @issue.subtitle %></h2>
-<span class="previous navigation">
-  <%= link_to @issue.previous_label, issue_path(@issue.previous_id) %>
-</span>
-<span class="next navigation">
-  <%= link_to @issue.next_label, issue_path(@issue.next_id) %>
-</span>
+<div class="navigation">
+  <span class="previous">
+    <%= link_to @issue.previous_label, issue_path(@issue.previous_id) %>
+  </span>
+  <span class="next">
+    <%= link_to @issue.next_label, issue_path(@issue.next_id) %>
+  </span>
+  <div class="audio-box">
+  </div >
+</div>
 
 
 <% if @issue.audio %>
-
-  <div class="audio-box">
-  </div>
   <script type="text/javascript">
     var audio = new Audio('<%= "#{Issue::BASE_DOMAIN_URL}/#{@issue.audio.src}" %>');
     audio.loop = true;
