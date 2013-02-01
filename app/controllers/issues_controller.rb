@@ -8,4 +8,8 @@ class IssuesController < ApplicationController
     @issue = Issue.fetch(params[:id])
     render
   end
+
+  def redirection
+    redirect_to(issue_path(params[:id]))
+  end
 end
