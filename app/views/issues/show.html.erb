@@ -9,10 +9,24 @@
 
 
 <% if @issue.audio %>
+
   <div class="audio-box">
-    <%= audio_tag Issue::BASE_DOMAIN_URL + "/" + @issue.audio.src, :autoplay => true, :controls => true, :loop => true %>
-    </audio>
   </div>
+  <script type="text/javascript">
+    var audio = new Audio('<%= "#{Issue::BASE_DOMAIN_URL}/#{@issue.audio.src}" %>');
+    audio.loop = true;
+    audio.controls = true;
+    audio.autoplay = true;
+
+    /* hack for browsers that don't support the nice autoplay and loop attributes */
+    
+    audio.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.play();
+    }, false);
+    audio.play();
+    $('.audio-box').append(audio);
+  </script>
 <% end %>
 
 <ul id="images">
