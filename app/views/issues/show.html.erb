@@ -2,7 +2,7 @@
 $(function() {
 
   function moveWithScroll($el) {
-    window.onscroll = function() {
+    $(window).scroll(function() {
       this.offsets = this.offsets || {}
       var offset = this.offsets[$el] = this.offsets[$el] || $el.position().top;
       if (document.documentElement.scrollTop > offset || self.pageYOffset > offset) {
@@ -10,9 +10,21 @@ $(function() {
       } else if (document.documentElement.scrollTop < offset || self.pageYOffset < offset) {
         $el.css({position: 'static', top: offset + 'px'});
       }
-    }
+    });
   }
   moveWithScroll($('.navigation'));
+
+  var $el = $('.audio-box');
+  $(window).scroll(function() {
+    this.offset = this.offset || $el.position().top;
+    if (document.documentElement.scrollTop > offset || self.pageYOffset > offset) {
+      var audio_width = $('audio', $el).width();
+      var left_margin = (0 - audio_width / 2)
+      $el.css({position: 'fixed', top: '0px', left: "50%", 'margin-left': left_margin + "px", 'margin-top': '5px'});
+    } else if (document.documentElement.scrollTop < offset || self.pageYOffset < offset) {
+      $el.css({position: 'static', top: offset + 'px', left: "0", 'margin-left': 0, 'margin-top': '30px'});
+    }
+  });
 });
 </script>
 <h1><%= @issue.title %></h1>
@@ -27,7 +39,6 @@ $(function() {
   <div class="audio-box">
   </div >
 </div>
-
 
 <% if @issue.audio %>
   <script type="text/javascript">
