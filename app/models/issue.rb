@@ -5,7 +5,7 @@ require 'json'
 class Issue
   BASE_DOMAIN_URL = "http://www.werewolvesfuckyoface.com"
   FILE_ROOT = 'db/issues'
-  LATEST_ISSUE_ID = 13
+  LATEST_ISSUE_ID = 14
   
   attr_reader :title, :subtitle, :next_label, :previous_label, :audio, :images, :id
 
@@ -58,7 +58,7 @@ class Issue
   end
 
   def self.crawl_all
-    (2..13).each do |issue_number|
+    (2..LATEST_ISSUE_ID).each do |issue_number|
       crawl issue_number
     end
   end
