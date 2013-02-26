@@ -10,7 +10,7 @@ class Issue
   attr_reader :title, :subtitle, :next_label, :previous_label, :audio, :images, :id
 
   def previous_id
-    if id > 2
+    if id > 1
       id - 1
     else
       LATEST_ISSUE_ID
@@ -21,12 +21,11 @@ class Issue
     if id < LATEST_ISSUE_ID
       id + 1
     else
-      2
+      1
     end
   end
 
   def self.latest
-    #TODO don't hardcode this.
     self.fetch(LATEST_ISSUE_ID)
   end
 
@@ -58,7 +57,7 @@ class Issue
   end
 
   def self.crawl_all
-    (2..LATEST_ISSUE_ID).each do |issue_number|
+    (1..LATEST_ISSUE_ID).each do |issue_number|
       crawl issue_number
     end
   end
