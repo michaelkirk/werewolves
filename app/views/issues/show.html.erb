@@ -31,10 +31,10 @@ $(function() {
 <h2><%= @issue.subtitle %></h2>
 <div class="navigation">
   <span class="previous">
-    <%= link_to @issue.previous_label, issue_path(@issue.previous_id) %>
+    <%= link_to previous_label(@issue.previous_label), issue_path(@issue.previous_id) %>
   </span>
   <span class="next">
-    <%= link_to @issue.next_label, issue_path(@issue.next_id) %>
+    <%= link_to next_label(@issue.next_label), issue_path(@issue.next_id) %>
   </span>
   <div class="audio-box">
   </div >
