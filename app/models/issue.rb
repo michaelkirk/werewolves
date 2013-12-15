@@ -5,7 +5,7 @@ require 'json'
 class Issue
   BASE_DOMAIN_URL = "http://www.werewolvesfuckyoface.com"
   FILE_ROOT = 'db/issues'
-  LATEST_ISSUE_ID = 15
+  LATEST_ISSUE_ID = 17
   
   attr_reader :title, :subtitle, :next_label, :previous_label, :audio, :images, :id
 
@@ -68,7 +68,11 @@ class Issue
 
 
   def self.crawl(issue_number)
-    url = [BASE_DOMAIN_URL, "page_#{issue_number}.html"].join('/')
+    if issue_number == LATEST_ISSUE_ID
+      url = [BASE_DOMAIN_URL, "index.html"].join('/')
+    else
+      url = [BASE_DOMAIN_URL, "page_#{issue_number}.html"].join('/')
+    end
     Rails.logger.debug("crawling: #{url}")
     issue = Issue.from_url(url)
     File.open(file_name(issue_number), 'w') { |file| file << issue.to_json }
