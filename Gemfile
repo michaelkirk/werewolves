@@ -23,7 +23,6 @@ gem 'nokogiri'
 group :development do
   gem 'rspec-rails'
   gem 'guard-rspec'
-  gem 'rb-inotify'
   gem 'pry'
 end
 
