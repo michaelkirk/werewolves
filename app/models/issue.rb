@@ -5,7 +5,7 @@ require 'json'
 class Issue
   BASE_DOMAIN_URL = "http://www.werewolvesfuckyoface.com"
   FILE_ROOT = 'db/issues'
-  LATEST_ISSUE_ID = 17
+  LATEST_ISSUE_ID = 18
   
   attr_reader :title, :subtitle, :next_label, :previous_label, :audio, :images, :id
 
@@ -81,7 +81,8 @@ class Issue
   def parse(html)
     doc = Nokogiri.HTML(html)
     @images = doc.css('img').map { |img| Image.from_tag(img) }
-    @audio = Audio.from_tag(doc.css('embed')[0]) unless doc.css('embed').empty?
+    @audio = Audio.from_tag(doc.css('audio')[0]) unless doc.css('audio').empty?
+    @audio ||= Audio.from_tag(doc.css('embed')[0]) unless doc.css('embed').empty?
     @title = doc.css('h1').text
     @subtitle = doc.css('.soundtrack').text
     @next_label = doc.css('h3 a:contains(">")').text
